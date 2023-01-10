@@ -90,7 +90,7 @@ function Update() {
             }
         }
         fetchData();
-    }, []);
+    }, [id]);
 
 
 
@@ -114,7 +114,7 @@ function Update() {
         getImage();
         post.categories = location.search?.split('=')[1] || 'All';
         post.username = context.username;
-    }, [file])
+    }, [file, context.username, location.search, post])
 
     const handleChange = (e) => {
         setPost ({...post, [e.target.name]: e.target.value})
