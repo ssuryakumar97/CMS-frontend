@@ -129,6 +129,7 @@ function Login({isUserAuthenticated}) {
             navigate('/');
         } else {
             setError ('Something went wrong! Please try again later');
+            
         }
     }
 
@@ -142,7 +143,7 @@ function Login({isUserAuthenticated}) {
       
       <TextField id="standard-basic"  onChange={(e)=> onvaluechange(e)} label="Username" variant="standard" name="username" value={login.username}/>
       <TextField id="standard-basic" onChange={(e)=> onvaluechange(e)} label="Password" variant="standard" name="password" value={login.password}/>
-      {/* {error && <Error>{error}</Error>} */}
+      {error && <Error>{error}</Error>}
       <SignInButton variant="contained" onClick={()=> loginUser()}>Login</SignInButton>
       <Text>OR</Text>
       <SignUpButton variant="text" onClick={()=>toggleSignIn()}>Signup</SignUpButton>
