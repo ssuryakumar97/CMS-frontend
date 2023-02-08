@@ -60,25 +60,25 @@ function CreatePost() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // const convertToBase64 = (fileData) => {
-    //     return new Promise((resolve, reject) => {
-    //       const fileReader = new FileReader();
-    //       fileReader.readAsDataURL(fileData);
-    //       fileReader.onload = () => {
-    //         resolve(fileReader.result);
-    //       };
-    //       fileReader.onerror = (error) => {
-    //         reject(error);
-    //       };
-    //     });
-    //   };
+    const convertToBase64 = (fileData) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(fileData);
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
 
-    //   const handleFileUpload = async (e) => {
-    //     const fileData = e.target.files[0];
-    //     const base64 = await convertToBase64(fileData);
-    //     setFile(base64);
-    //     console.log(base64)
-    //   }
+      const handleFileUpload = async (e) => {
+        const fileData = e.target.files[0];
+        const base64 = await convertToBase64(fileData);
+        setFile(base64);
+        console.log(base64)
+      }
 
     
 
@@ -131,7 +131,8 @@ function CreatePost() {
                     type='file' 
                     id='fileInput'
                     style={{display: 'none'}}
-                    onChange={(e) => {setFile(e.target.files[0])}}
+                    // onChange={(e) => {setFile(e.target.files[0])}}
+                    onChange={(e) => {handleFileUpload(e)}}
                  />
 
                 <InputTextField placeholder="Title" onChange={(e) => handleChange(e)} name = 'title'/>
