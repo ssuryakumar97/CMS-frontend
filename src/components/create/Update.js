@@ -114,7 +114,7 @@ function Update() {
         getImage();
         post.categories = location.search?.split('=')[1] || 'All';
         post.username = context.username;
-    }, [file, context.username, location.search, post])
+    }, [file])
 
     const handleChange = (e) => {
         setPost ({...post, [e.target.name]: e.target.value})

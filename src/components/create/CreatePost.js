@@ -102,7 +102,7 @@ function CreatePost() {
         getImage();
         post.categories = location.search?.split('=')[1] || 'All';
         post.username = context.username;
-    }, [context.username, location.search, post, file])
+    }, [file])
 
     const handleChange = (e) => {
         setPost ({...post, [e.target.name]: e.target.value})

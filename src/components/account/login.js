@@ -108,6 +108,7 @@ function Login({isUserAuthenticated}) {
             setError('')
         } else {
             setError('Something went wrong! Please try again later');
+            console.log(error);
         }
     }
 
