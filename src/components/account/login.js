@@ -85,6 +85,7 @@ function Login({isUserAuthenticated}) {
     const [signup, setSignup] = useState(signUpInitialValues)
     const [error, setError] = useState('');
     const [login, setLogin] = useState(loginInitialValues);
+    const [value, setValue] = useState(null);
 
     //to navigate to home page
     const navigate = useNavigate(); 
@@ -106,7 +107,9 @@ function Login({isUserAuthenticated}) {
             setSignup(signUpInitialValues)
             setAccount('signIn')
             setError('')
-        } else {
+        } else if(response.message == "User already exists") {
+            setValue(response.message);
+        }else{
             setError('Something went wrong! Please try again later');
             console.log(error);
         }
@@ -157,7 +160,8 @@ function Login({isUserAuthenticated}) {
         <TextField id="standard-basic" onChange={(e)=>onInputChange(e)} label="Username" variant="standard" name="username"  value={signup.username} />
         <TextField id="standard-basic" onChange={(e)=>onInputChange(e)} label="EmailId" variant="standard" name="emailId" value={signup.emailId} />
         <TextField id="standard-basic" onChange={(e)=>onInputChange(e)} label="Password" variant="standard" name="password" value={signup.password} />
-        {error && <Error>{error}</Error>}
+        {/* {error && <Error>{error}</Error>} */}
+        {value && <Error>{value}</Error>}
         <SignInButton onClick={() => signupUser()} variant="contained">SignUp</SignInButton>
         <Text>OR</Text>
         <SignUpButton variant="text" onClick={()=>toggleSignIn()}>Already have an account</SignUpButton>
