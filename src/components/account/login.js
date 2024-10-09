@@ -3,6 +3,8 @@ import { Box , TextField, Button, styled, Typography } from '@mui/material';
 import { API } from '../../service/api';
 import { DataContext } from '../../context/Dataprovider';
 import { useNavigate } from 'react-router-dom';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  
 const Component = styled(Box)`
     width: 400px;
@@ -99,14 +101,17 @@ function Login({isUserAuthenticated}) {
     const signupUser = async() => {
         let response = await API.userSignup(signup);
         console.log(response);
-        if(response.isSuccess){
+        if(response.isSuccess && response.data.message !=="User already exists"){
             setSignup(signUpInitialValues);
+            toast.success(response.data.message)
             setAccount('signIn')
             setError('')
-        } else if(response.message == "User already exists") {
+        } else if(response.data.message == "User already exists") {
             setValue(response.message);
+            toast.error(`${response.data.message}, please login`)
         }else{
             setError('Something went wrong! Please try again later');
+            toast.error('Something went wrong! Please try again later')
             console.log(error);
         }
     }
@@ -126,6 +131,7 @@ function Login({isUserAuthenticated}) {
             
             setContext({username: response.data.username, emailId: response.data.emailId});
             isUserAuthenticated(true);
+            toast.success("Logged in successfully")
             navigate('/');
         } else {
             setError ('Something went wrong! Please try again later');

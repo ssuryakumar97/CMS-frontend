@@ -10,6 +10,7 @@ import DetailView from './components/details/DetailsView';
 import Update from './components/create/Update';
 import About from './components/about/About';
 import Contact from './components/contact/Contact';
+import { ToastContainer } from 'react-toastify';
 
 const PrivateRoute = ({isAuthenticated, ...props}) => {
 
@@ -29,6 +30,7 @@ function App() {
   return (
     
     <DataProvider>
+      <ToastContainer autoClose="2000"/>
       <BrowserRouter>
       <div>
         <Routes>
